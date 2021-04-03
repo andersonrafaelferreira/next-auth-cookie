@@ -1,7 +1,29 @@
 import Head from 'next/head'
 import styles from '../styles/Home.module.css'
 
+import Cookie from 'js-cookie';
+
+import { addDays } from 'date-fns';
+
 export default function Home() {
+
+  function signIn() {
+    Cookie.set("token", "d8ahp93y3uqa9yec9ya36o26196",{
+      expires: addDays(new Date(), 1),
+    }); 
+    
+    console.log("signIn", addDays(new Date(), 1));
+
+    console.log(Cookie.get("token"));
+
+  }
+
+  function signOut() {
+    Cookie.remove("token");
+
+    console.log("signOut");
+  }
+
   return (
     <div className={styles.container}>
       <Head>
@@ -13,6 +35,14 @@ export default function Home() {
         <h1 className={styles.title}>
           Welcome to <a href="https://nextjs.org">Next.js!</a>
         </h1>
+
+        <button onClick={signIn}>
+          Sign in 
+        </button>
+
+        <button onClick={signOut}>
+          Sign out 
+        </button>
 
         <p className={styles.description}>
           Get started by editing{' '}
